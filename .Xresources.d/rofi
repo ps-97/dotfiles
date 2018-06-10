@@ -1,0 +1,25 @@
+! Enable the extended coloring options
+rofi.color-enabled: true
+
+! Property Name     BG       Border   Separator
+rofi.color-window:  #343d46, #c0c5ce, #2b303b
+
+! Property Name     BG       FG       BG-alt   Head-BG  Head-FG
+rofi.color-normal:  #343d46, #c0c5ce, #343d46, #343d46, #eff1f5
+rofi.color-active:  #343d46, #8fa1b3, #343d46, #343d46, #8fa1b3
+rofi.color-urgent:  #343d46, #bf616a, #343d46, #343d46, #bf616a
+
+! Set the desired separator style
+!rofi.separator-style: solid
+
+rofi.terminal: rxvt-unicode
+rofi.font:  Hack 12
+rofi.fullscreen: false
+rofi.eh: 1
+rofi.hide-scrollbar: true
+rofi.lines: 5
+!rofi.width: 100
+rofi.padding: 10
+rofi.bw: 5
+rofi.auto-select: false
+rofi.separator-style: none
