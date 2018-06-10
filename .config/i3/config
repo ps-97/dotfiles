@@ -195,7 +195,7 @@ mode "$mode_system" {
 bindsym $mod+shift+e mode "$mode_system"
 
 # i3lock
-bindsym $mod+shift+x exec --no-startup-id ~/bin/scripts/lock.sh
+bindsym $mod+shift+x exec --no-startup-id ~/bin/lock.sh
 
 # Autolock after 10 minute
 exec --no-startup-id xautolock -time 10 -locker "~/bin/scripts/lock.sh" &

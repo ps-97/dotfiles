@@ -212,5 +212,5 @@ blacklist-1 = scroll lock
 
 [module/aur_updates]
 type = custom/script
-exec = ~/bin/scripts/aur_updates.sh
+exec = ~/bin/aur_updates.sh
 interval = 600
