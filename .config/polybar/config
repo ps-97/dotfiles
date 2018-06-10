@@ -1,0 +1,216 @@
+# Polybar Config
+# vim:filetype=dosini
+
+[colors]
+base00 = #2b303b
+base01 = #343d46
+base02 = #4f5b66
+base03 = #65737e
+base04 = #a7adba
+base05 = #c0c5ce
+base06 = #dfe1e8
+base07 = #eff1f5
+base08 = #bf616a
+base09 = #d08770
+base0A = #ebcb8b
+base0B = #a3be8c
+base0C = #96b5b4
+base0D = #8fa1b3
+base0E = #b48ead
+base0F = #ab7967
+
+background = ${colors.base00} 
+background-alt = ${colors.base02}
+foreground = ${colors.base05}
+foreground-alt = #c0c5ce
+primary = ${colors.base0D}
+secondary = ${colors.base0A}
+alert = ${colors.base08}
+
+[bar/top]
+width = 100%
+height = 27
+radius = 0
+fixed-center = false
+
+monitor = LVDS1
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 0
+
+module-margin = 1
+separator =   
+
+font-0 = Hack:pixelsize=9;1
+font-1 = FontAwesome:pixelsize=10;1
+
+modules-left = i3
+modules-center = 
+modules-right = memory network cpu aur_updates battery volume arch-update date 
+
+tray-position = right
+tray-padding = 2
+;tray-transparent = true
+;tray-background = #0063ff
+
+;override-redirect = true
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+;pin-workspaces = true
+
+label-mode-padding = 1
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-focused = %index%:%icon%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 1
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%:%icon%
+label-unfocused-padding = 1 
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%:%icon%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%:%icon%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 1
+
+; ws-icon-[0-9]+ = label;icon
+; NOTE: The label needs to match the name of the i3 workspace
+ws-icon-0 = "1:;"
+ws-icon-1 = "2:;"
+ws-icon-2 = "3:;"
+ws-icon-3 = "4:;"
+ws-icon-4 = "5:;"
+ws-icon-5 = "6:;"
+ws-icon-6 = "7:;"
+ws-icon-7 = "8:;"
+;ws-icon-default = ♟
+
+[module/cpu]
+label-padding = 1
+type = internal/cpu
+interval = 2
+;format-underline = ${colors.base0E}
+label =  %percentage%%
+
+[module/memory]
+type = internal/memory
+label-padding = 1
+interval = 2
+;format-underline = ${colors.base08}
+label =  %gb_free%
+
+[module/battery]
+type = internal/battery
+label-padding = 1
+full-at = 85
+
+battery = BAT0
+adapter = AC
+
+time-format = %H:%M
+
+format-charging = <label-charging>
+;format-charging-underline = ${colors.base0B}
+format-discharging = <label-discharging>
+;format-discharging-underline = ${colors.base0A}
+
+label-charging =  %percentage%% 
+label-discharging =  %percentage%%
+label-full = 
+
+
+
+[module/date]
+type = internal/date
+label-padding = 1
+
+interval = 1.0
+
+date = %Y-%m-%d%
+
+; Optional time format
+time = %H:%M
+
+format = <label>
+label =  %time% %date%
+label-font = 3
+;format-underline = ${colors.base0C} 
+
+[module/network]
+type = internal/network
+interface = wlp3s0
+label-padding = 1
+
+interval = 3.0
+
+format-connected = <label-connected>
+label-connected = %essid% %downspeed:7%
+;format-connected-underline = ${colors.base09}
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+; vim:ft=dosini
+
+[module/volume]
+type = internal/volume
+label-padding = 1
+;format-volume-underline = ${colors.base03}
+
+master-soundcard = default
+speaker-soundcard = default
+headphone-soundcard = default
+
+format-volume = <label-volume>
+format-muted = <label-muted>
+
+label-volume =  %percentage%%
+label-muted = 
+
+[module/xkeyboard]
+type = internal/xkeyboard
+
+; List of indicators to ignore
+blacklist-0 = num lock
+blacklist-1 = scroll lock
+
+[module/aur_updates]
+type = custom/script
+exec = ~/bin/scripts/aur_updates.sh
+interval = 600
