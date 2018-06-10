@@ -56,5 +56,5 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 alias vi="vim"
 alias jrnl="~/bin/scripts/jrnl.sh"
 alias shwjrnl="vim ~/doc/jrnl"
-alias recon="~/bin/scripts/connman.sh"
+alias recon="~/bin/connman.sh"
 alias dotfiles='git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME' 
