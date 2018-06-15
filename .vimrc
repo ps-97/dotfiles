@@ -40,6 +40,10 @@ command W w !sudo tee % > /dev/null
 " Provides top-complerion for all file-related tasks
 set path+=**
 
+" Always source vimrc after saving
+autocmd bufwritepost .vimrc source $MYVIMRC
+" Edit vimrc on the fly
+nmap <leader>v :tabedit $MYVIMRC<CR>
 " }}}1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -136,17 +140,24 @@ set wrap "Wrap lines
 " {{{1=> Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Smart way to move between windows
+map <C-h> <C-W>h
 map <C-j> <C-W>j
 map <C-k> <C-W>k
-map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
-map <leader>t<leader> :tabnext 
+map <C-S-]> gt
+map <C-S-[> gT
+map <C-1> 1gt
+map <C-2> 2gt
+map <C-3> 3gt
+map <C-4> 4gt
+map <C-5> 5gt
+map <C-6> 6gt
+map <C-7> 7gt
+map <C-8> 8gt
+map <C-9> 9gt
+map <C-0> :tablast<CR>
 " }}}1
 
 """"""""""""""""""""""""""""""
@@ -201,27 +212,27 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins {{{1
 " => Lightline {{{2
- set noshowmode
- set ttimeoutlen=50
-let g:lightline = {
-		\ 'colorscheme': 'base16_ocean',
-		\ 'separator': { 'left': '', 'right': '' },
-		\ 'subseparator': { 'left': '', 'right': '' },
-        \ 'tabline': {
-        \   'left': [ ['bufferline'] ]
-        \ },
-        \ 'component_expand': {
-        \   'bufferline': 'LightlineBufferline',
-        \ },
-        \ 'component_type': {
-        \   'bufferline': 'tabsel',
-        \ },
-      	\ }
-
-function! LightlineBufferline()
-  call bufferline#refresh_status()
-  return [ g:bufferline_status_info.before, g:bufferline_status_info.current, g:bufferline_status_info.after]
-endfunction
+"  set noshowmode
+"  set ttimeoutlen=50
+" let g:lightline = {
+" 		\ 'colorscheme': 'base16_ocean',
+" 		\ 'separator': { 'left': '', 'right': '' },
+" 		\ 'subseparator': { 'left': '', 'right': '' },
+"         \ 'tabline': {
+"         \   'left': [ ['bufferline'] ]
+"         \ },
+"         \ 'component_expand': {
+"         \   'bufferline': 'LightlineBufferline',
+"         \ },
+"         \ 'component_type': {
+"         \   'bufferline': 'tabsel',
+"         \ },
+"       	\ }
+" 
+" function! LightlineBufferline()
+"   call bufferline#refresh_status()
+"   return [ g:bufferline_status_info.before, g:bufferline_status_info.current, g:bufferline_status_info.after]
+" endfunction
 "}}}2
 "}}}1
 
