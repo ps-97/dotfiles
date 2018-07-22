@@ -58,3 +58,4 @@ alias jrnl="~/bin/jrnl.sh"
 alias shwjrnl="vim ~/doc/jrnl"
 alias recon="~/bin/connman.sh"
 alias dotfiles='git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME' 
+
