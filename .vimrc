@@ -36,12 +36,6 @@ nmap <leader>w :w!<cr>
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
 
-" searh down into subfolders
-" Provides top-complerion for all file-related tasks
-set path+=**
-
-" Always source vimrc after saving
-autocmd bufwritepost .vimrc source $MYVIMRC
 " Edit vimrc on the fly
 nmap <leader>v :tabedit $MYVIMRC<CR>
 " }}}1
@@ -137,7 +131,7 @@ set wrap "Wrap lines
 " }}}1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" {{{1=> Moving around, tabs, windows and buffers
+" {{{1=> Moving around, tabs, windows, buffers and Files
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Smart way to move between windows
 map <C-h> <C-W>h
@@ -145,19 +139,20 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-l> <C-W>l
 
-" Useful mappings for managing tabs
-map <C-S-]> gt
-map <C-S-[> gT
-map <C-1> 1gt
-map <C-2> 2gt
-map <C-3> 3gt
-map <C-4> 4gt
-map <C-5> 5gt
-map <C-6> 6gt
-map <C-7> 7gt
-map <C-8> 8gt
-map <C-9> 9gt
-map <C-0> :tablast<CR>
+" Finding files
+" searh down into subfolders
+" Provides top-complerion for all file-related tasks
+set path+=**
+
+" Display all matching files when we tab complete
+set wildmenu
+
+" File browsing using netrw
+let g:netrw_banner=0		" disable banner
+let g:netrw_browse_split=4	" open in prior window
+let g:netrw_altv=1			" open splits to the right
+let g:netrw_liststyle=3		" tree view
+let g:netrw_winsize = 15
 " }}}1
 
 """"""""""""""""""""""""""""""
@@ -212,27 +207,27 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins {{{1
 " => Lightline {{{2
-"  set noshowmode
-"  set ttimeoutlen=50
-" let g:lightline = {
-" 		\ 'colorscheme': 'base16_ocean',
-" 		\ 'separator': { 'left': '', 'right': '' },
-" 		\ 'subseparator': { 'left': '', 'right': '' },
-"         \ 'tabline': {
-"         \   'left': [ ['bufferline'] ]
-"         \ },
-"         \ 'component_expand': {
-"         \   'bufferline': 'LightlineBufferline',
-"         \ },
-"         \ 'component_type': {
-"         \   'bufferline': 'tabsel',
-"         \ },
-"       	\ }
-" 
-" function! LightlineBufferline()
-"   call bufferline#refresh_status()
-"   return [ g:bufferline_status_info.before, g:bufferline_status_info.current, g:bufferline_status_info.after]
-" endfunction
+ set noshowmode
+ set ttimeoutlen=50
+let g:lightline = {
+		\ 'colorscheme': 'base16_ocean',
+		\ 'separator': { 'left': '', 'right': '' },
+		\ 'subseparator': { 'left': '', 'right': '' },
+        \ 'tabline': {
+        \   'left': [ ['bufferline'] ]
+        \ },
+        \ 'component_expand': {
+        \   'bufferline': 'LightlineBufferline',
+        \ },
+        \ 'component_type': {
+        \   'bufferline': 'tabsel',
+        \ },
+      	\ }
+
+function! LightlineBufferline()
+  call bufferline#refresh_status()
+  return [ g:bufferline_status_info.before, g:bufferline_status_info.current, g:bufferline_status_info.after]
+endfunction
 "}}}2
 "}}}1
 
