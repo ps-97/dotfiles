@@ -13,7 +13,7 @@ font pango: Hack 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id st
+bindsym $mod+Return exec --no-startup-id xst
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -253,7 +253,7 @@ for_window [instance="scratchpad"] move scratchpad
 for_window [instance="scratchpad"] border pixel 5
 # Runs the tmuxinit script, which searches for an earlier tmux instance,
 # otherwise starts a new one (to prevent multiple dropdown sessions).
-exec --no-startup-id st -n scratchpad -e tmux new-session -A -s scratchpad 
+exec --no-startup-id xst -n scratchpad -e tmux new-session -A -s scratchpad 
 
 # Viewnoir
 for_window [class="Viewnior"] floating enable

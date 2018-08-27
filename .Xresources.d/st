@@ -3,7 +3,7 @@
 ! see src/config.h for more information about option meanings.
 
 ! These options only take effect on startup.
-st.termname:	st-256color
+!st.termname:	st-256color
 
 st.font:	Hack:pixelsize=14:antialias=true:autohint=true;
 !st.font:    ypn envypn:pixelsize=15:antialias=true:autohint=true;
