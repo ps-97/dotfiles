@@ -15,6 +15,9 @@ Plugin 'VundleVim/Vundle.vim'
 " plugin on GitHub repo
 Plugin 'itchyny/lightline.vim'
 Plugin 'bling/vim-bufferline'
+Plugin 'chriskempson/base16-vim'
+Plugin 'mike-hearn/base16-vim-lightline'
+Plugin 'scrooloose/nerdtree'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -53,6 +56,9 @@ function! LightlineBufferline()
   return [ g:bufferline_status_info.before, g:bufferline_status_info.current, g:bufferline_status_info.after]
 endfunction
 "}}}2
+"=> NerdTree{{{2
+map <C-n> :NERDTreeToggle<CR>
+"}}}3
 "}}}1
 
 " base-16{{{1 
@@ -90,7 +96,7 @@ let mapleader = "\<Space>"
 nmap <leader>w :w!<cr>
 
 " Set sytem clipboard
-set clipboard+=unnamed
+set clipboard=unnamedplus
 
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
