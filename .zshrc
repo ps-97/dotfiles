@@ -61,4 +61,12 @@ alias jrnl="~/bin/jrnl.sh"
 alias shwjrnl="vim ~/doc/jrnl"
 alias recon="~/bin/connman.sh"
 alias dotfiles='git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME' 
+alias dmenu="dmenu -nb '#2b303b' -nf '#c0c5ce' -sb '#343d46' -sf '#c0c5ce' -fn 'Hack:pixelsize=15' -h 50 -w 450 -x 600 -y 400 -dim .5"
 
+# Personal functions
+timer() {
+  local N=$1; shift
+
+  (sleep $N && notify-send -u normal "Time is UP!")&
+  echo "timer set for $N"
+}

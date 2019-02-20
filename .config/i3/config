@@ -111,6 +111,9 @@ assign [class="Viewnior"] 			$workspace6
 assign [class="feh"] 			    $workspace6
 assign [class="Thunar"] 			$workspace7
 assign [class="TelegramDesktop"]	$workspace8
+assign [class="freetube"]			$workspaces5
+assign [class="Spotify"]			$workspaces5
+
 
 # Cycle through active workspaces
 bindsym $mod+Tab workspace next
@@ -221,6 +224,7 @@ for_window [class="^.*"] border pixel 3
 # gaps
 gaps inner 10
 gaps outer 5
+gaps top 35
 
 # Set wallpaper
 exec --no-startup-id feh --bg-scale ~/media/pictures/wallpapers/white_castle.jpg
@@ -230,7 +234,7 @@ exec --no-startup-id feh --bg-scale ~/media/pictures/wallpapers/white_castle.jpg
 
 # Key bindings
 # screenshot
-bindsym $mod+shift+p exec --no-startup-id scrot -e 'mv $f ~/media/pictures/screenshots/'
+bindsym $mod+p exec --no-startup-id scrot -e 'mv $f ~/media/pictures/screenshots/'
 
 # Firefox
 bindsym $mod+shift+b exec --no-startup-id firefox
@@ -258,3 +262,6 @@ exec --no-startup-id xst -n scratchpad -e tmux new-session -A -s scratchpad
 # Viewnoir
 for_window [class="Viewnior"] floating enable
 #for_window [class="feh"] floating enable
+
+# Pass
+bindsym $mod+Shift+p  exec --no-startup-id  passmenu -nb '#2b303b' -nf '#c0c5ce' -sb '#343d46' -sf '#c0c5ce' -fn 'Hack:pixelsize=15' -h 50 -w 450 -x 600 -y 400 -dim .5

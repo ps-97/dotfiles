@@ -28,10 +28,15 @@ secondary = ${colors.base0A}
 alert = ${colors.base08}
 
 [bar/top]
-width = 100%
+width = 98%
 height = 27
-radius = 0
-fixed-center = false
+radius = 1
+offset-x = 15
+offset-y = 3
+fixed-center = true
+override-redirect = true
+wm-restack = i3
+
 
 monitor = LVDS1
 
@@ -41,8 +46,8 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = #f00
 
-border-size = 0
-border-color = #00000000
+border-size = 3
+border-color = $base05
 
 padding-left = 0
 padding-right = 0
@@ -90,7 +95,7 @@ label-mode-background = ${colors.primary}
 ; focused = Active workspace on focused monitor
 label-focused = %index%:%icon%
 label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
+label-focused-underline= ${colors.background-alt}
 label-focused-padding = 1
 
 ; unfocused = Inactive workspace on any monitor
