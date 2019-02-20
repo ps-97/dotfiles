@@ -9,7 +9,7 @@ st.font:	Hack:pixelsize=14:antialias=true:autohint=true;
 !st.font:    ypn envypn:pixelsize=15:antialias=true:autohint=true;
 st.bold_font: 1
 
-st.borderpx: 10
+st.borderpx: 8
 
 ! if you do not set shell, precedence is: -e arg, utmp option, SHELL env var, /etc/passwd shell
 st.shell:        /bin/zsh
