@@ -9,6 +9,8 @@ Plug 'bling/vim-bufferline'
 Plug 'chriskempson/base16-vim'
 Plug 'mike-hearn/base16-vim-lightline'
 Plug 'scrooloose/nerdtree'
+Plug 'klen/python-mode', { 'branch': 'develop' }
+Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""}}}2
@@ -45,7 +47,28 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 
-"}}}3
+" Make it pretty
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+"}}}2
+"
+"=> pymode{{{2
+let g:pymode = 1
+let g:pymode_trim_whitespace = 1
+let g:pymode_options = 1
+let g:pymode_python = 'python3'
+let g:pymode_indent = 1
+let g:pymode_virtualenv = 1
+
+" Run code
+let g:pymode_run = 1
+let g:pymode_run_bind = '<leader>r'
+
+" Breakpoints
+let g:pymode_breakpoint = 1
+let g:pymode_breakpoint_bind = '<leader>b'
+let g:pymode_breakpoint_cmd = ''
+
 "}}}1
 
 " base-16{{{1 
@@ -91,6 +114,9 @@ command W w !sudo tee % > /dev/null
 
 " Edit vimrc on the fly
 nmap <leader>v :tabedit $MYVIMRC<CR>
+
+" Enable project specific vimrc
+set exrc
 " }}}1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
