@@ -19,7 +19,7 @@ bindsym $mod+Return exec --no-startup-id xst
 bindsym $mod+Shift+q kill
 
 # rofi
-bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+d exec --no-startup-id rofi -modi run -show run
 
 # change focus
 bindsym $mod+j focus left
