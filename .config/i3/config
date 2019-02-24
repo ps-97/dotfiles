@@ -113,6 +113,7 @@ assign [class="Thunar"] 			$workspace7
 assign [class="TelegramDesktop"]	$workspace8
 assign [class="freetube"]			$workspaces5
 assign [class="Spotify"]			$workspaces5
+assign [class="Surf"]	$workspace8
 
 
 # Cycle through active workspaces
