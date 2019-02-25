@@ -1,5 +1,5 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugins {{{1
+" => Plugins {{{2
 " => vim-plug {{{2
 call plug#begin('~/.vim/plugged')
 
@@ -9,11 +9,22 @@ Plug 'bling/vim-bufferline'
 Plug 'chriskempson/base16-vim'
 Plug 'mike-hearn/base16-vim-lightline'
 Plug 'scrooloose/nerdtree'
-Plug 'klen/python-mode', { 'branch': 'develop' }
+"Plug 'klen/python-mode', { 'branch': 'develop' }
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'jiangmiao/auto-pairs'
+" => Auto-completion {{{3
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1 
+"}}}3
 
 call plug#end()
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""}}}2
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""}}}
 " => Lightline {{{2
  set noshowmode
  set ttimeoutlen=50
@@ -51,23 +62,26 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 "}}}2
+""=> pymode{{{2
+"let g:pymode = 1
+"let g:pymode_trim_whitespace = 1
+"let g:pymode_options = 1
+"let g:pymode_python = 'python3'
+"let g:pymode_indent = 0
+"let g:pymode_virtualenv = 1
+"let g:pymode_options_colorcolumn = 0
+"let g:pymode_indent = 1
+"let g:pymode_doc = 0
+"let g:pymode_rope_completion = 1
 "
-"=> pymode{{{2
-let g:pymode = 1
-let g:pymode_trim_whitespace = 1
-let g:pymode_options = 1
-let g:pymode_python = 'python3'
-let g:pymode_indent = 1
-let g:pymode_virtualenv = 1
-
-" Run code
-let g:pymode_run = 1
-let g:pymode_run_bind = '<leader>r'
-
-" Breakpoints
-let g:pymode_breakpoint = 1
-let g:pymode_breakpoint_bind = '<leader>b'
-let g:pymode_breakpoint_cmd = ''
+"" Run code
+"let g:pymode_run = 1
+"let g:pymode_run_bind = '<leader>r'
+"
+"" Breakpoints
+"let g:pymode_breakpoint = 1
+"let g:pymode_breakpoint_bind = '<leader>b'
+"let g:pymode_breakpoint_cmd = ''
 
 "}}}1
 
