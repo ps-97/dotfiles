@@ -27,12 +27,15 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+# Set $PATH variable
+export PATH="${PATH}:$HOME/bin"
+
 # export language environment
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
- export EDITOR='vim'
+ export EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -56,10 +59,15 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 setopt COMPLETE_ALIASES
 
 # Personal Alias
-alias vi="vim"
+# nvim
+if [ -x "$(command -v nvim)" ]; then
+	alias vi="nvim"
+else
+	alias vi="vim"
+fi
+
 alias jrnl="~/bin/jrnl.sh"
 alias shwjrnl="vim ~/doc/jrnl"
-alias recon="~/bin/connman.sh"
 alias dotfiles='git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME' 
 alias dmenu="dmenu -nb '#2b303b' -nf '#c0c5ce' -sb '#343d46' -sf '#c0c5ce' -fn 'Hack:pixelsize=15' -h 50 -w 450 -x 600 -y 400 -dim .5"
 
@@ -70,3 +78,6 @@ timer() {
   (sleep $N && notify-send -u normal "Time is UP!")&
   echo "timer set for $N"
 }
+
+# Python venv
+export WORKON_HOME=~/dev/envs
