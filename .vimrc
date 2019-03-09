@@ -1,18 +1,17 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugins {{{2
+" => Plugins {{{1
 " => vim-plug {{{2
 call plug#begin('~/.vim/plugged')
 
-" plugin on GitHub repo
 Plug 'itchyny/lightline.vim'
 Plug 'bling/vim-bufferline'
 Plug 'chriskempson/base16-vim'
 Plug 'mike-hearn/base16-vim-lightline'
 Plug 'scrooloose/nerdtree'
-"Plug 'klen/python-mode', { 'branch': 'develop' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'jiangmiao/auto-pairs'
-" => Auto-completion {{{3
+
+" Autocompletion
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -20,12 +19,16 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
-let g:deoplete#enable_at_startup = 1 
-"}}}3
 
+Plug 'zchee/deoplete-jedi'
+Plug 'sbdchd/neoformat'
+Plug 'machakann/vim-highlightedyank'
+Plug 'neomake/neomake'
+
+Plug 'jeetsukumaran/vim-buffergator'
 call plug#end()
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""}}}
-" => Lightline {{{2
+"}}}2
+" => Lightline {{{3
  set noshowmode
  set ttimeoutlen=50
 let g:lightline = {
@@ -47,7 +50,7 @@ function! LightlineBufferline()
   call bufferline#refresh_status()
   return [ g:bufferline_status_info.before, g:bufferline_status_info.current, g:bufferline_status_info.after]
 endfunction
-"}}}2
+"}}}3
 "=> NerdTree{{{2
 map <C-n> :NERDTreeToggle<CR>
 
@@ -61,30 +64,38 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 " Make it pretty
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
+
+
+" Open NERDTree automatically when vim starts up 
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 "}}}2
-""=> pymode{{{2
-"let g:pymode = 1
-"let g:pymode_trim_whitespace = 1
-"let g:pymode_options = 1
-"let g:pymode_python = 'python3'
-"let g:pymode_indent = 0
-"let g:pymode_virtualenv = 1
-"let g:pymode_options_colorcolumn = 0
-"let g:pymode_indent = 1
-"let g:pymode_doc = 0
-"let g:pymode_rope_completion = 1
-"
-"" Run code
-"let g:pymode_run = 1
-"let g:pymode_run_bind = '<leader>r'
-"
-"" Breakpoints
-"let g:pymode_breakpoint = 1
-"let g:pymode_breakpoint_bind = '<leader>b'
-"let g:pymode_breakpoint_cmd = ''
+" => deoplete {{{2
+let g:deoplete#enable_at_startup = 1
 
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+set splitbelow
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+"}}}2
+" => python_spesific {{{2
+" Enable alignment
+let g:neoformat_basic_format_align = 1
+
+" Enable tab to spaces conversion
+let g:neoformat_basic_format_retab = 1
+
+" Enable trimmming of trailing whitespace
+let g:neoformat_basic_format_trim = 1
+
+let g:neomake_python_enabled_makers = ['pylint']
+
+let g:python3_host_prog = '/usr/bin/python3'
+
+call neomake#configure#automake('w')
+
+"}}}2
 "}}}1
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " base-16{{{1 
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
@@ -299,11 +310,6 @@ endif
 
 "=> Autocmd {{{1
 
-"NerdTree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 "}}}1
-
-
 
 
