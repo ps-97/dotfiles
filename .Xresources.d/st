@@ -5,8 +5,9 @@
 ! These options only take effect on startup.
 !st.termname:	st-256color
 
-st.font:	Hack:pixelsize=14:antialias=true:autohint=true;
+!st.font:	Hack:pixelsize=14:antialias=true:autohint=true;
 !st.font:    ypn envypn:pixelsize=15:antialias=true:autohint=true;
+st.font:	Fira\ Code:pixelsize=14:antialias=true:autohint=true;
 st.bold_font: 1
 
 st.borderpx: 8
@@ -18,7 +19,7 @@ st.shell:        /bin/zsh
 st.opacity:      255
 ! Defaults taken from base16-twilight colorscheme.
 st.foreground:   #a7adba
-st.background:   #2b303b 
+st.background:   #2b303b
 st.color0:       #343d46
 st.color1:       #bf616a
 st.color2:       #a3be8c

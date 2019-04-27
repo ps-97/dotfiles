@@ -3,54 +3,36 @@
 " => vim-plug {{{2
 call plug#begin('~/.vim/plugged')
 
-Plug 'itchyny/lightline.vim'
-Plug 'bling/vim-bufferline'
 Plug 'chriskempson/base16-vim'
-Plug 'mike-hearn/base16-vim-lightline'
 Plug 'scrooloose/nerdtree'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'jiangmiao/auto-pairs'
+Plug 'ryanoasis/vim-devicons'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'tpope/vim-surround'
+Plug 'yggdroot/indentline'
+Plug 'takac/vim-hardtime'
 
-" Autocompletion
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+" IDE like
+Plug 'w0rp/ale'
 
-Plug 'zchee/deoplete-jedi'
-Plug 'sbdchd/neoformat'
-Plug 'machakann/vim-highlightedyank'
-Plug 'neomake/neomake'
+" Autocopletion
+Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
 
-Plug 'jeetsukumaran/vim-buffergator'
+" Python
+Plug 'hynek/vim-python-pep8-indent'
+
+" Javascript
+Plug 'posva/vim-vue'
+Plug 'othree/html5.vim'
+
+" Solidity
+Plug 'tomlion/vim-solidity'
+
 call plug#end()
 "}}}2
-" => Lightline {{{3
- set noshowmode
- set ttimeoutlen=50
-let g:lightline = {
-		\ 'colorscheme': 'base16_ocean',
-		\ 'separator': { 'left': '', 'right': '' },
-		\ 'subseparator': { 'left': '', 'right': '' },
-        \ 'tabline': {
-        \   'left': [ ['bufferline'] ]
-        \ },
-        \ 'component_expand': {
-        \   'bufferline': 'LightlineBufferline',
-        \ },
-        \ 'component_type': {
-        \   'bufferline': 'tabsel',
-        \ },
-      	\ }
-
-function! LightlineBufferline()
-  call bufferline#refresh_status()
-  return [ g:bufferline_status_info.before, g:bufferline_status_info.current, g:bufferline_status_info.after]
-endfunction
-"}}}3
 "=> NerdTree{{{2
 map <C-n> :NERDTreeToggle<CR>
 
@@ -66,45 +48,95 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
 
-" Open NERDTree automatically when vim starts up 
+" Open NERDTree automatically when vim starts up
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" Statusline
+let g:NERDTreeStatusline = 'File Browser'
 "}}}2
-" => deoplete {{{2
-let g:deoplete#enable_at_startup = 1
+" => coc {{{2
+" if hidden is not set, TextEdit might fail.
+set hidden
 
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-set splitbelow
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" Better display for messages
+set cmdheight=2
+
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+"set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+
 "}}}2
-" => python_spesific {{{2
-" Enable alignment
-let g:neoformat_basic_format_align = 1
+" => ALE & misc {{{2
+let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
 
-" Enable tab to spaces conversion
-let g:neoformat_basic_format_retab = 1
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\}
 
-" Enable trimmming of trailing whitespace
-let g:neoformat_basic_format_trim = 1
+" Set this variable to 1 to fix files when you save them.
+let g:ale_fix_on_save = 1
 
-let g:neomake_python_enabled_makers = ['pylint']
+let g:better_whitespace_enabled = 1
+let g:strip_whitespace_on_save = 1
 
-let g:python3_host_prog = '/usr/bin/python3'
-
-call neomake#configure#automake('w')
+let g:indentLine_char = '¦'
+let g:indentLine_setColors = 0
 
 "}}}2
+" => Airline {{{2
+let g:airline_theme='base16'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#whitespace = 1
+"}}}2
+" => ctrlP {{{2
+let g:ctrlp_cmd = 'CtrlPBuffer'
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_working_path_mode = 'ra'
+"}}}2
+" => Snippet {{{2
+" }}}2
 "}}}1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" base-16{{{1 
+" base-16{{{1
 if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
+	let base16colorspace=256
+	source ~/.vimrc_background
 endif
 "}}}1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Initialization {{{1
-" 
+"
 "vim: set foldenable, foldmethod=marker, foldlevel=0
 
 "}}}1
@@ -131,17 +163,20 @@ let mapleader = "\<Space>"
 nmap <leader>w :w!<cr>
 
 " Set sytem clipboard
-set clipboard=unnamedplus
+"set clipboard=unnamedplus
 
-" :W sudo saves the file 
+" :W sudo saves the file
 " (useful for handling the permission-denied error)
-command W w !sudo tee % > /dev/null
+" command W w !sudo tee % > /dev/null
 
 " Edit vimrc on the fly
 nmap <leader>v :tabedit $MYVIMRC<CR>
 
 " Enable project specific vimrc
 set exrc
+
+" Turn of beep
+set belloff=all
 " }}}1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -159,23 +194,23 @@ set ruler
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Highlight search results
 set hlsearch
 
 " Makes search act like search in modern browsers
-set incsearch 
+set incsearch
 
 " Don't redraw while executing macros (good performance config)
-set lazyredraw 
+set lazyredraw
 
 " For regular expressions turn magic on
 set magic
 
 " Show matching brackets when text indicator is over them
-set showmatch 
+set showmatch
 
 " How many tenths of a second to blink when matching brackets
 set mat=2
@@ -191,7 +226,7 @@ let g:airline_powerline_fonts = 1
 " {{{1=> Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
-syntax enable 
+syntax enable
 
 " Access colors present in 256 colorspace
 let base16colorspace=256
@@ -199,7 +234,7 @@ let base16colorspace=256
 " Enable 256 colors palette
 set t_Co=256
 
-" Color scheme 
+" Color scheme
 colorscheme base16-ocean
 "
 " Set dark background
@@ -213,8 +248,8 @@ set encoding=utf8
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " {{{1=> Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Don't use spaces instead of tabs
-set noexpandtab
+" Use spaces instead of tabs
+set expandtab
 
 " Be smart when using tabs ;)
 set smarttab
@@ -286,7 +321,7 @@ map <leader>s? z=
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
- 
+
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
 
@@ -296,20 +331,21 @@ map <silent> <leader><cr> :noh<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Folding {{{1
 if has("folding")
-    set foldenable " Enable folding
-    set foldmethod=marker " Use markers to specify folds
+	set foldenable " Enable folding
+	set foldmethod=marker " Use markers to specify folds
 
-" Mapping {{{2
-    " Use Syntax Folding
-    nmap <Leader>fs <Esc>:set foldmethod=syntax<CR>
-    " Use Marker Folding
-    nmap <Leader>fm <Esc>:set foldmethod=marker<CR>
-" }}}2
+	" Mapping {{{2
+	" Use Syntax Folding
+	nmap <Leader>fs <Esc>:set foldmethod=syntax<CR>
+	" Use Marker Folding
+	nmap <Leader>fm <Esc>:set foldmethod=marker<CR>
+	" }}}2
 endif
 " }}}1
 
 "=> Autocmd {{{1
-
+" Set maximum column for python
+au BufRead,BufNewFile *.py setlocal colorcolumn=79
 "}}}1
 
-
+"let g:hardtime_default_on = 1

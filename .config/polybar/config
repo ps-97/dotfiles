@@ -19,7 +19,7 @@ base0D = #8fa1b3
 base0E = #b48ead
 base0F = #ab7967
 
-background = ${colors.base00} 
+background = ${colors.base00}
 background-alt = ${colors.base02}
 foreground = ${colors.base05}
 foreground-alt = #c0c5ce
@@ -53,14 +53,14 @@ padding-left = 0
 padding-right = 0
 
 module-margin = 1
-separator =   
+separator =
 
 font-0 = Hack:pixelsize=9;1
 font-1 = FontAwesome:pixelsize=10;1
 
 modules-left = i3
-modules-center = 
-modules-right = memory network cpu aur_updates battery volume arch-update date 
+modules-center =
+modules-right = memory network cpu battery volume arch-update date
 
 tray-position = right
 tray-padding = 2
@@ -100,7 +100,7 @@ label-focused-padding = 1
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%:%icon%
-label-unfocused-padding = 1 
+label-unfocused-padding = 1
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %index%:%icon%
@@ -154,7 +154,7 @@ format-charging = <label-charging>
 format-discharging = <label-discharging>
 ;format-discharging-underline = ${colors.base0A}
 
-label-charging =  %percentage%% 
+label-charging =  %percentage%%
 label-discharging =  %percentage%%
 label-full = 
 
@@ -174,7 +174,7 @@ time = %H:%M
 format = <label>
 label =  %time% %date%
 label-font = 3
-;format-underline = ${colors.base0C} 
+;format-underline = ${colors.base0C}
 
 [module/network]
 type = internal/network

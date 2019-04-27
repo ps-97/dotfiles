@@ -182,7 +182,7 @@ client.urgent           $base08 $base08 $base00 $base08 $base08
 client.placeholder      $base00 $base00 $base05 $base00 $base00
 client.background $base07
 
-# Start polybar  
+# Start polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Power management
@@ -190,7 +190,7 @@ set $mode_system :S̲hutdown :R̲eboot :L̲ogout
 mode "$mode_system" {
     bindsym l exec --no-startup-id i3-msg exit, mode "default"
         bindsym r exec --no-startup-id systemctl reboot, mode "default"
-        bindsym s exec --no-startup-id systemctl poweroff -i, mode "default"  
+        bindsym s exec --no-startup-id systemctl poweroff -i, mode "default"
 
 # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -242,7 +242,7 @@ bindsym $mod+shift+b exec --no-startup-id firefox
 bindsym $mod+shift+i exec --no-startup-id firefox --private-window
 
 # Auto hide mouse
-exec --no-startup-id unclutter -idle 1  -jitter 3 -noevents -root  
+exec --no-startup-id unclutter -idle 1  -jitter 3 -noevents -root
 
 # Compton
 exec --no-startup-id compton --config ~/.config/compton/config
@@ -258,7 +258,7 @@ for_window [instance="scratchpad"] move scratchpad
 for_window [instance="scratchpad"] border pixel 5
 # Runs the tmuxinit script, which searches for an earlier tmux instance,
 # otherwise starts a new one (to prevent multiple dropdown sessions).
-exec --no-startup-id xst -n scratchpad -e tmux new-session -A -s scratchpad 
+exec --no-startup-id xst -n scratchpad -e tmux new-session -A -s scratchpad
 
 # Viewnoir
 for_window [class="Viewnior"] floating enable
